@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Anantha Krishna B</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: 'class', theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Merriweather', 'serif'] } } } }
+    </script>
+    <script>
+        if (localStorage.getItem('color-theme') === 'light') { document.documentElement.classList.remove('dark'); } else { document.documentElement.classList.add('dark'); }
+    </script>
+    
+    <!-- MathJax (Even on contact page for consistency) -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Merriweather:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-white dark:bg-zinc-950 text-zinc-800 dark:text-zinc-300 transition-colors duration-300 font-sans min-h-screen flex flex-col">
+
+    <header class="py-8 px-4 md:px-0 max-w-2xl mx-auto w-full flex flex-col md:flex-row md:justify-between md:items-end mb-12 border-b border-zinc-100 dark:border-zinc-900 pb-8">
+        <div><h1 class="text-3xl font-serif text-zinc-900 dark:text-zinc-100">Contact</h1></div>
+        <nav class="mt-4 md:mt-0 space-x-4 text-sm font-medium text-zinc-500">
+            <a href="index.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Home</a>
+            <a href="publications.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Research</a>
+            <a href="teaching.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Teaching</a>
+            <a href="miscellaneous.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Misc</a>
+            <button id="theme-toggle" class="hover:text-zinc-900 dark:hover:text-zinc-100 ml-2 focus:outline-none"><i class="fas fa-adjust"></i></button>
+        </nav>
+    </header>
+
+    <main class="flex-grow px-4 md:px-0 max-w-2xl mx-auto w-full">
+        <div class="space-y-8 font-light leading-relaxed">
+            
+            <div>
+                <h3 class="text-sm font-semibold uppercase tracking-wider text-zinc-500 mb-2">Email</h3>
+                <a href="mailto:ananthakrishnab@iisc.ac.in" class="text-lg hover:text-blue-600 dark:hover:text-blue-400 transition">
+                    ananthakrishnab@iisc.ac.in
+                </a>
+            </div>
+
+            <div>
+                <h3 class="text-sm font-semibold uppercase tracking-wider text-zinc-500 mb-2">Office Address</h3>
+                <p>
+                    Department of Mathematics<br>
+                    Indian Institute of Science<br>
+                    Bengaluru - 560012, India
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="py-8 text-center text-zinc-400 text-sm font-light mt-12">&copy; <script>document.write(new Date().getFullYear())</script> Anantha Krishna B.</footer>
+
+    <script>
+        const btn = document.getElementById('theme-toggle');
+        btn.addEventListener('click', function() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark'); localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark'); localStorage.setItem('color-theme', 'dark');
+            }
+        });
+    </script>
+</body>
+</html>
