@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talks | Anantha Krishna B</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Dark Mode Logic -->
+    <script>
+        if (localStorage.getItem('color-theme') === 'light') {
+            document.documentElement.classList.remove('dark');
+        } else {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+    
+    <!-- MathJax -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Merriweather:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-white dark:bg-zinc-950 text-zinc-800 dark:text-zinc-300 transition-colors duration-300 font-sans min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="py-8 px-4 md:px-0 max-w-2xl mx-auto w-full flex flex-col md:flex-row md:justify-between md:items-end mb-12 border-b border-zinc-100 dark:border-zinc-900 pb-8">
+        <div><h1 class="text-3xl font-serif text-zinc-900 dark:text-zinc-100">Talks</h1></div>
+        <nav class="mt-4 md:mt-0 space-x-4 text-sm font-medium text-zinc-500">
+            <a href="index.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Home</a>
+            <a href="publications.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Research</a>
+            <a href="teaching.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Teaching</a>
+            <a href="miscellaneous.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Misc</a>
+            <a href="contact.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Contact</a>
+            <button id="theme-toggle" class="hover:text-zinc-900 dark:hover:text-zinc-100 ml-2 focus:outline-none"><i class="fas fa-adjust"></i></button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow px-4 md:px-0 max-w-2xl mx-auto w-full animate-fade-in opacity-0">
+        
+        <div class="space-y-8">
+            <ul class="space-y-6 font-light leading-relaxed">
+                <li>
+                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline">
+                        <a href="https://math.iisc.ac.in/Postdoc_Student_Symposium-2025.html#anantha" target="_blank" class="font-medium text-zinc-900 dark:text-zinc-100 hover:text-blue-600 dark:hover:text-blue-400 transition">
+                            On Haar Measure on Reductive Groups
+                        </a>
+                        <span class="text-sm text-zinc-500 mt-1 sm:mt-0 whitespace-nowrap ml-4">Nov 17, 2025</span>
+                    </div>
+                    <p class="text-zinc-500 text-sm mt-1">Postdoc Student Symposium</p>
+                </li>
+
+                <li>
+                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline">
+                        <a href="https://iiscmathstudentseminars.wordpress.com/2025/09/15/introduction-to-root-systems/" target="_blank" class="font-medium text-zinc-900 dark:text-zinc-100 hover:text-blue-600 dark:hover:text-blue-400 transition">
+                            Introduction to Root Systems
+                        </a>
+                        <span class="text-sm text-zinc-500 mt-1 sm:mt-0 whitespace-nowrap ml-4">Sep 16, 2025</span>
+                    </div>
+                    <p class="text-zinc-500 text-sm mt-1">IISc Math Student Seminar</p>
+                </li>
+
+                <li>
+                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline">
+                        <a href="https://iiscmathstudentseminars.wordpress.com/2024/03/18/introduction-to-projective-representations-of-finite-groups/" target="_blank" class="font-medium text-zinc-900 dark:text-zinc-100 hover:text-blue-600 dark:hover:text-blue-400 transition">
+                            Introduction to projective representations of finite groups
+                        </a>
+                        <span class="text-sm text-zinc-500 mt-1 sm:mt-0 whitespace-nowrap ml-4">March 18, 2024</span>
+                    </div>
+                    <p class="text-zinc-500 text-sm mt-1">IISc Math Student Seminar</p>
+                </li>
+            </ul>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center text-zinc-400 text-sm font-light mt-12">
+        &copy; <script>document.write(new Date().getFullYear())</script> Anantha Krishna B.
+    </footer>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        const btn = document.getElementById('theme-toggle');
+        btn.addEventListener('click', function() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark'); localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark'); localStorage.setItem('color-theme', 'dark');
+            }
+        });
+    </script>
+</body>
+</html>
