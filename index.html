@@ -15,6 +15,15 @@
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                         serif: ['Merriweather', 'serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
                     }
                 }
             }
@@ -49,16 +58,14 @@
 
     <!-- Minimal Header -->
     <header class="py-8 px-4 md:px-0 max-w-2xl mx-auto w-full flex justify-end items-center">
-        <!-- AKB Removed -->
-        
-        <button id="theme-toggle" class="text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition focus:outline-none">
+        <button id="theme-toggle" class="text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition focus:outline-none transform hover:rotate-12 duration-300">
             <i id="theme-toggle-dark-icon" class="fas fa-moon hidden"></i>
             <i id="theme-toggle-light-icon" class="fas fa-sun hidden"></i>
         </button>
     </header>
 
-    <!-- Main Content -->
-    <main class="flex-grow flex flex-col justify-center px-4 md:px-0 max-w-2xl mx-auto w-full py-12">
+    <!-- Main Content with Fade-In Animation -->
+    <main class="flex-grow flex flex-col justify-center px-4 md:px-0 max-w-2xl mx-auto w-full py-12 animate-fade-in opacity-0">
         
         <div class="mb-12">
             <h1 class="text-4xl md:text-5xl font-serif text-zinc-900 dark:text-zinc-100 mb-8">Anantha Krishna B</h1>
@@ -67,33 +74,30 @@
             <div class="prose dark:prose-invert prose-lg font-light leading-relaxed mb-12 text-zinc-600 dark:text-zinc-300">
                 <p class="mb-4">
                     I am a Ph.D. student in the Department of Mathematics at the 
-                    <a href="https://iisc.ac.in" class="text-zinc-900 dark:text-white font-normal hover:underline">Indian Institute of Science</a>, Bengaluru.
+                    <a href="https://iisc.ac.in" class="text-zinc-900 dark:text-white font-normal hover:underline decoration-zinc-400 dark:decoration-zinc-600 underline-offset-2">Indian Institute of Science</a>, Bengaluru.
                 </p>
                 <p class="mb-4">
-                    My research interests primarily lie in <strong>Representation theory of $p$-adic groups.</strong> 
-                    
-                    
-                    <!-- Math Example -->
-                    
-                </p>
-                <p>
-                    
+                    My research interests primarily lie in <strong>Representation theory of $p$-adic groups.</strong>
                 </p>
             </div>
             
-            <!-- Navigation List -->
+            <!-- Navigation List with Hover Animations -->
             <nav class="space-y-4 border-t border-zinc-100 dark:border-zinc-900 pt-8">
-                <a href="publications.html" class="block text-lg hover:text-blue-600 dark:hover:text-blue-400 transition group">
-                    <span class="inline-block w-4 opacity-0 group-hover:opacity-100 transition-opacity">&rarr;</span> Research
+                <a href="publications.html" class="block text-lg hover:text-blue-600 dark:hover:text-blue-400 transition duration-300 group flex items-center">
+                    <span class="inline-block w-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 mr-2">&rarr;</span>
+                    <span class="transform group-hover:translate-x-1 transition-transform duration-300">Research</span>
                 </a>
-                <a href="teaching.html" class="block text-lg hover:text-blue-600 dark:hover:text-blue-400 transition group">
-                    <span class="inline-block w-4 opacity-0 group-hover:opacity-100 transition-opacity">&rarr;</span> Teaching
+                <a href="teaching.html" class="block text-lg hover:text-blue-600 dark:hover:text-blue-400 transition duration-300 group flex items-center">
+                    <span class="inline-block w-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 mr-2">&rarr;</span>
+                    <span class="transform group-hover:translate-x-1 transition-transform duration-300">Teaching</span>
                 </a>
-                <a href="miscellaneous.html" class="block text-lg hover:text-blue-600 dark:hover:text-blue-400 transition group">
-                    <span class="inline-block w-4 opacity-0 group-hover:opacity-100 transition-opacity">&rarr;</span> Miscellaneous
+                <a href="miscellaneous.html" class="block text-lg hover:text-blue-600 dark:hover:text-blue-400 transition duration-300 group flex items-center">
+                    <span class="inline-block w-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 mr-2">&rarr;</span>
+                    <span class="transform group-hover:translate-x-1 transition-transform duration-300">Miscellaneous</span>
                 </a>
-                <a href="contact.html" class="block text-lg hover:text-blue-600 dark:hover:text-blue-400 transition group">
-                    <span class="inline-block w-4 opacity-0 group-hover:opacity-100 transition-opacity">&rarr;</span> Contact
+                <a href="contact.html" class="block text-lg hover:text-blue-600 dark:hover:text-blue-400 transition duration-300 group flex items-center">
+                    <span class="inline-block w-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 mr-2">&rarr;</span>
+                    <span class="transform group-hover:translate-x-1 transition-transform duration-300">Contact</span>
                 </a>
             </nav>
         </div>
@@ -138,7 +142,4 @@
         });
     </script>
 </body>
-
 </html>
-
-
