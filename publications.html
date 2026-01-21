@@ -6,7 +6,16 @@
     <title>Research | Anantha Krishna B</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = { darkMode: 'class', theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Merriweather', 'serif'] } } } }
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Merriweather', 'serif'] },
+                    animation: { 'fade-in': 'fadeIn 0.5s ease-out forwards' },
+                    keyframes: { fadeIn: { '0%': { opacity: '0', transform: 'translateY(10px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } } }
+                }
+            }
+        }
     </script>
     <script>
         if (localStorage.getItem('color-theme') === 'light') { document.documentElement.classList.remove('dark'); } else { document.documentElement.classList.add('dark'); }
@@ -30,27 +39,37 @@
 
     <header class="py-8 px-4 md:px-0 max-w-2xl mx-auto w-full flex flex-col md:flex-row md:justify-between md:items-end mb-12 border-b border-zinc-100 dark:border-zinc-900 pb-8">
         <div><h1 class="text-3xl font-serif text-zinc-900 dark:text-zinc-100">Research</h1></div>
-        <nav class="mt-4 md:mt-0 space-x-4 text-sm font-medium text-zinc-500">
-            <a href="index.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Home</a>
-            <a href="teaching.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Teaching</a>
-            <a href="miscellaneous.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Misc</a>
-            <a href="contact.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition">Contact</a>
-            <button id="theme-toggle" class="hover:text-zinc-900 dark:hover:text-zinc-100 ml-2 focus:outline-none"><i class="fas fa-adjust"></i></button>
+        
+        <!-- Animated Nav Links -->
+        <nav class="mt-4 md:mt-0 space-x-6 text-sm font-medium text-zinc-500">
+            <a href="index.html" class="relative group hover:text-blue-600 dark:hover:text-blue-400 transition duration-300">
+                Home <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="teaching.html" class="relative group hover:text-blue-600 dark:hover:text-blue-400 transition duration-300">
+                Teaching <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="miscellaneous.html" class="relative group hover:text-blue-600 dark:hover:text-blue-400 transition duration-300">
+                Misc <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="contact.html" class="relative group hover:text-blue-600 dark:hover:text-blue-400 transition duration-300">
+                Contact <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <button id="theme-toggle" class="hover:text-zinc-900 dark:hover:text-zinc-100 ml-2 focus:outline-none transform hover:rotate-12 duration-300"><i class="fas fa-adjust"></i></button>
         </nav>
     </header>
 
-    <main class="flex-grow px-4 md:px-0 max-w-2xl mx-auto w-full">
+    <main class="flex-grow px-4 md:px-0 max-w-2xl mx-auto w-full animate-fade-in opacity-0">
         <ul class="space-y-10">
             
-            <!-- Paper Item with Math -->
-       <p>
-  <strong>On a series of Hurwitz zeta functions.</strong> (2023). 
-  <em>The Mathematics Student</em>, 92(3-4), 141–145. 
-  <a href="https://www.indianmathsoc.org/pdf/Mathstudent-V92-part3-4-2023.pdf" target="_blank">[link]</a>
-</p>
+            <!-- Paper Item -->
+            <li>
+                <p class="text-lg leading-relaxed text-zinc-800 dark:text-zinc-200">
+                    <strong>On a series of Hurwitz zeta functions.</strong> (2023). <br>
+                    <span class="text-zinc-600 dark:text-zinc-400 italic">The Mathematics Student</span>, 92(3-4), 141–145. 
+                    <a href="https://www.indianmathsoc.org/pdf/Mathstudent-V92-part3-4-2023.pdf" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline ml-1">[link]</a>
+                </p>
+            </li>
 
-            <!-- Preprint Item -->
-           
         </ul>
     </main>
 
@@ -67,6 +86,4 @@
         });
     </script>
 </body>
-
 </html>
-
