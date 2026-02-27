@@ -54,10 +54,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Merriweather:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-white dark:bg-zinc-950 text-zinc-800 dark:text-zinc-300 transition-colors duration-300 font-sans min-h-screen flex flex-col">
+<body class="bg-white dark:bg-zinc-950 text-zinc-800 dark:text-zinc-300 transition-colors duration-300 font-sans min-h-screen flex flex-col relative overflow-x-hidden">
+    <!-- Mild tiled background pattern -->
+    <div aria-hidden="true" class="pointer-events-none fixed inset-0 opacity-40 dark:opacity-25 [background-size:36px_36px] [background-image:linear-gradient(to_right,rgba(24,24,27,0.06)_1px,transparent_1px),linear-gradient(to_bottom,rgba(24,24,27,0.06)_1px,transparent_1px)] dark:[background-image:linear-gradient(to_right,rgba(244,244,245,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(244,244,245,0.08)_1px,transparent_1px)]"></div>
 
     <!-- Minimal Header -->
-    <header class="py-8 px-4 md:px-0 max-w-2xl mx-auto w-full flex justify-end items-center">
+    <header class="relative z-10 py-8 px-4 md:px-0 max-w-2xl mx-auto w-full flex justify-end items-center">
         <button id="theme-toggle" class="text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition focus:outline-none transform hover:rotate-12 duration-300">
             <i id="theme-toggle-dark-icon" class="fas fa-moon hidden"></i>
             <i id="theme-toggle-light-icon" class="fas fa-sun hidden"></i>
@@ -65,7 +67,7 @@
     </header>
 
     <!-- Main Content with Fade-In Animation -->
-    <main class="flex-grow flex flex-col justify-center px-4 md:px-0 max-w-2xl mx-auto w-full py-12 animate-fade-in opacity-0">
+    <main class="relative z-10 flex-grow flex flex-col justify-center px-4 md:px-0 max-w-2xl mx-auto w-full py-12 animate-fade-in opacity-0">
         
         <div class="mb-12">
             <h1 class="text-4xl md:text-5xl font-serif text-zinc-900 dark:text-zinc-100 mb-8">Anantha Krishna B</h1>
@@ -101,7 +103,7 @@
                 </a>
                 <a href="miscellaneous.html" class="block text-lg hover:text-blue-600 dark:hover:text-blue-400 transition duration-300 group flex items-center">
                     <span class="inline-block w-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 mr-2">&rarr;</span>
-                    <span class="transform group-hover:translate-x-1 transition-transform duration-300">Miscellaneous</span>
+                    <span class="transform group-hover:translate-x-1 transition-transform duration-300">Misc</span>
                 </a>
                 <a href="contact.html" class="block text-lg hover:text-blue-600 dark:hover:text-blue-400 transition duration-300 group flex items-center">
                     <span class="inline-block w-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 mr-2">&rarr;</span>
@@ -113,7 +115,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="py-8 text-center text-zinc-400 text-sm font-light">
+    <footer class="relative z-10 py-8 text-center text-zinc-400 text-sm font-light">
         &copy; <script>document.write(new Date().getFullYear())</script> Anantha Krishna B.
     </footer>
 
