@@ -115,6 +115,11 @@
 
     </main>
 
+    <!-- Visitor Counter -->
+    <div id="visitor-counter" class="fixed bottom-4 right-4 z-20 rounded-md border border-zinc-200/70 dark:border-zinc-700/70 bg-white/85 dark:bg-zinc-900/85 backdrop-blur px-3 py-2 text-xs text-zinc-600 dark:text-zinc-300 shadow-sm">
+        Unique visitors: <span id="visitor-count">...</span>
+    </div>
+
     <!-- Footer -->
     <footer class="relative z-10 py-8 text-center text-zinc-400 text-sm font-light">
         &copy; <script>document.write(new Date().getFullYear())</script> Anantha Krishna B.
@@ -151,7 +156,64 @@
                 }
             }
         });
+
+        (async function updateVisitorCount() {
+            var countEl = document.getElementById('visitor-count');
+            var counterNamespace = 'ananthakb-website';
+            var counterKey = 'homepage-unique-20260406';
+            var localVisitorFlag = 'homepage-unique-visitor-counted-v1';
+            var localLastCount = 'homepage-unique-visitor-last-count-v1';
+
+            function safeGetLocalStorage(key) {
+                try {
+                    return localStorage.getItem(key);
+                } catch (error) {
+                    return null;
+                }
+            }
+
+            function safeSetLocalStorage(key, value) {
+                try {
+                    localStorage.setItem(key, value);
+                } catch (error) {
+                    // Ignore localStorage write failures (private mode/storage blocking).
+                }
+            }
+
+            async function fetchCount(url) {
+                var response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error('Counter API request failed');
+                }
+                var data = await response.json();
+                if (typeof data.value !== 'number') {
+                    throw new Error('Counter value missing');
+                }
+                return data.value;
+            }
+
+            var shouldIncrement = !safeGetLocalStorage(localVisitorFlag);
+            var hitUrl = 'https://api.countapi.xyz/hit/' + counterNamespace + '/' + counterKey;
+            var getUrl = 'https://api.countapi.xyz/get/' + counterNamespace + '/' + counterKey;
+            try {
+                var countValue;
+                if (shouldIncrement) {
+                    countValue = await fetchCount(hitUrl);
+                    safeSetLocalStorage(localVisitorFlag, '1');
+                } else {
+                    try {
+                        countValue = await fetchCount(getUrl);
+                    } catch (error) {
+                        countValue = await fetchCount(hitUrl);
+                    }
+                }
+                countEl.textContent = countValue.toLocaleString();
+                safeSetLocalStorage(localLastCount, String(countValue));
+            } catch (error) {
+                var cachedCount = safeGetLocalStorage(localLastCount);
+                countEl.textContent = cachedCount ? Number(cachedCount).toLocaleString() : '...';
+            }
+        })();
     </script>
 </body>
 </html>
-
