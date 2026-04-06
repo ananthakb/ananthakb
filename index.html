@@ -115,11 +115,6 @@
 
     </main>
 
-    <!-- Visitor Counter -->
-    <div id="visitor-counter" class="fixed bottom-4 right-4 z-20 rounded-md border border-zinc-200/70 dark:border-zinc-700/70 bg-white/85 dark:bg-zinc-900/85 backdrop-blur px-3 py-2 text-xs text-zinc-600 dark:text-zinc-300 shadow-sm">
-        Unique visitors: <span id="visitor-count">...</span>
-    </div>
-
     <!-- Footer -->
     <footer class="relative z-10 py-8 text-center text-zinc-400 text-sm font-light">
         &copy; <script>document.write(new Date().getFullYear())</script> Anantha Krishna B.
@@ -156,30 +151,7 @@
                 }
             }
         });
-
-        (async function updateVisitorCount() {
-            var countEl = document.getElementById('visitor-count');
-            var counterNamespace = 'ananthakb-website';
-            var counterKey = 'homepage-unique-20260406';
-            var localVisitorFlag = 'homepage-unique-visitor-counted-v1';
-            var shouldIncrement = !localStorage.getItem(localVisitorFlag);
-            var endpoint = shouldIncrement
-                ? 'https://api.countapi.xyz/hit/' + counterNamespace + '/' + counterKey
-                : 'https://api.countapi.xyz/get/' + counterNamespace + '/' + counterKey;
-            try {
-                var response = await fetch(endpoint);
-                if (!response.ok) {
-                    throw new Error('Unable to update counter');
-                }
-                var data = await response.json();
-                countEl.textContent = data.value.toLocaleString();
-                if (shouldIncrement) {
-                    localStorage.setItem(localVisitorFlag, '1');
-                }
-            } catch (error) {
-                countEl.textContent = 'N/A';
-            }
-        })();
     </script>
 </body>
 </html>
+
