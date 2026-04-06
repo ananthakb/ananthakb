@@ -162,22 +162,56 @@
             var counterNamespace = 'ananthakb-website';
             var counterKey = 'homepage-unique-20260406';
             var localVisitorFlag = 'homepage-unique-visitor-counted-v1';
-            var shouldIncrement = !localStorage.getItem(localVisitorFlag);
-            var endpoint = shouldIncrement
-                ? 'https://api.countapi.xyz/hit/' + counterNamespace + '/' + counterKey
-                : 'https://api.countapi.xyz/get/' + counterNamespace + '/' + counterKey;
-            try {
-                var response = await fetch(endpoint);
+            var localLastCount = 'homepage-unique-visitor-last-count-v1';
+
+            function safeGetLocalStorage(key) {
+                try {
+                    return localStorage.getItem(key);
+                } catch (error) {
+                    return null;
+                }
+            }
+
+            function safeSetLocalStorage(key, value) {
+                try {
+                    localStorage.setItem(key, value);
+                } catch (error) {
+                    // Ignore localStorage write failures (private mode/storage blocking).
+                }
+            }
+
+            async function fetchCount(url) {
+                var response = await fetch(url);
                 if (!response.ok) {
-                    throw new Error('Unable to update counter');
+                    throw new Error('Counter API request failed');
                 }
                 var data = await response.json();
-                countEl.textContent = data.value.toLocaleString();
-                if (shouldIncrement) {
-                    localStorage.setItem(localVisitorFlag, '1');
+                if (typeof data.value !== 'number') {
+                    throw new Error('Counter value missing');
                 }
+                return data.value;
+            }
+
+            var shouldIncrement = !safeGetLocalStorage(localVisitorFlag);
+            var hitUrl = 'https://api.countapi.xyz/hit/' + counterNamespace + '/' + counterKey;
+            var getUrl = 'https://api.countapi.xyz/get/' + counterNamespace + '/' + counterKey;
+            try {
+                var countValue;
+                if (shouldIncrement) {
+                    countValue = await fetchCount(hitUrl);
+                    safeSetLocalStorage(localVisitorFlag, '1');
+                } else {
+                    try {
+                        countValue = await fetchCount(getUrl);
+                    } catch (error) {
+                        countValue = await fetchCount(hitUrl);
+                    }
+                }
+                countEl.textContent = countValue.toLocaleString();
+                safeSetLocalStorage(localLastCount, String(countValue));
             } catch (error) {
-                countEl.textContent = 'N/A';
+                var cachedCount = safeGetLocalStorage(localLastCount);
+                countEl.textContent = cachedCount ? Number(cachedCount).toLocaleString() : '...';
             }
         })();
     </script>
