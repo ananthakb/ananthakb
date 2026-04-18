@@ -60,7 +60,7 @@
 
 
     <!-- Minimal Header -->
-    <header class="relative z-10 py-8 px-4 md:px-0 max-w-4xl mx-auto w-full flex justify-end items-center">
+    <header class="relative z-10 py-8 px-4 md:px-0 max-w-2xl mx-auto w-full flex justify-end items-center">
         <button id="theme-toggle" class="text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition focus:outline-none transform hover:rotate-12 duration-300">
             <i id="theme-toggle-dark-icon" class="fas fa-moon hidden"></i>
             <i id="theme-toggle-light-icon" class="fas fa-sun hidden"></i>
@@ -68,7 +68,7 @@
     </header>
 
     <!-- Main Content with Fade-In Animation -->
-    <main class="relative z-10 flex-grow flex flex-col justify-center px-4 md:px-0 max-w-4xl mx-auto w-full py-12 animate-fade-in opacity-0">
+    <main class="relative z-10 flex-grow flex flex-col justify-center px-4 md:px-0 max-w-2xl mx-auto w-full py-12 animate-fade-in opacity-0">
         
         <div class="mb-12">
             <h1 class="text-4xl md:text-5xl font-serif text-zinc-900 dark:text-zinc-100 mb-8">Anantha Krishna B</h1>
@@ -84,39 +84,33 @@
                 </p>
             </div>
             
-            <!-- Navigation List with Hover Animations + Flower Image -->
-            <div class="border-t border-zinc-100 dark:border-zinc-900 pt-8 grid gap-8 md:grid-cols-[1fr_300px] items-start">
-                <nav class="space-y-4">
-                    <a href="publications.html" class="block text-lg hover:text-blue-600 dark:hover:text-blue-400 transition duration-300 group flex items-center">
-                        <span class="inline-block w-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 mr-2">&rarr;</span>
-                        <span class="transform group-hover:translate-x-1 transition-transform duration-300">Research</span>
-                    </a>
+            <!-- Navigation List with Hover Animations -->
+            <nav class="space-y-4 border-t border-zinc-100 dark:border-zinc-900 pt-8">
+                <a href="publications.html" class="block text-lg hover:text-blue-600 dark:hover:text-blue-400 transition duration-300 group flex items-center">
+                    <span class="inline-block w-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 mr-2">&rarr;</span>
+                    <span class="transform group-hover:translate-x-1 transition-transform duration-300">Research</span>
+                </a>
 
-                    <a href="talks.html" class="block text-lg hover:text-blue-600 dark:hover:text-blue-400 transition duration-300 group flex items-center">
-                        <span class="inline-block w-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 mr-2">&rarr;</span>
-                        <span class="transform group-hover:translate-x-1 transition-transform duration-300">Talks</span>
-                    </a>
+                <a href="talks.html" class="block text-lg hover:text-blue-600 dark:hover:text-blue-400 transition duration-300 group flex items-center">
+                    <span class="inline-block w-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 mr-2">&rarr;</span>
+                    <span class="transform group-hover:translate-x-1 transition-transform duration-300">Talks</span>
+                </a>
 
-                    <a href="teaching.html" class="block text-lg hover:text-blue-600 dark:hover:text-blue-400 transition duration-300 group flex items-center">
-                        <span class="inline-block w-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 mr-2">&rarr;</span>
-                        <span class="transform group-hover:translate-x-1 transition-transform duration-300">Teaching</span>
-                    </a>
-                    <a href="miscellaneous.html" class="block text-lg hover:text-blue-600 dark:hover:text-blue-400 transition duration-300 group flex items-center">
-                        <span class="inline-block w-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 mr-2">&rarr;</span>
-                        <span class="transform group-hover:translate-x-1 transition-transform duration-300">Misc</span>
-                    </a>
-                    <a href="contact.html" class="block text-lg hover:text-blue-600 dark:hover:text-blue-400 transition duration-300 group flex items-center">
-                        <span class="inline-block w-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 mr-2">&rarr;</span>
-                        <span class="transform group-hover:translate-x-1 transition-transform duration-300">Contact</span>
-                    </a>
-                </nav>
 
-                <img
-                    src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=700&q=80"
-                    alt="Yellow flower"
-                    class="w-full max-w-[300px] justify-self-start md:justify-self-end rounded-xl shadow-lg shadow-zinc-900/30 ring-1 ring-zinc-200/20 object-cover"
-                >
-            </div>
+                
+                <a href="teaching.html" class="block text-lg hover:text-blue-600 dark:hover:text-blue-400 transition duration-300 group flex items-center">
+                    <span class="inline-block w-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 mr-2">&rarr;</span>
+                    <span class="transform group-hover:translate-x-1 transition-transform duration-300">Teaching</span>
+                </a>
+                <a href="miscellaneous.html" class="block text-lg hover:text-blue-600 dark:hover:text-blue-400 transition duration-300 group flex items-center">
+                    <span class="inline-block w-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 mr-2">&rarr;</span>
+                    <span class="transform group-hover:translate-x-1 transition-transform duration-300">Misc</span>
+                </a>
+                <a href="contact.html" class="block text-lg hover:text-blue-600 dark:hover:text-blue-400 transition duration-300 group flex items-center">
+                    <span class="inline-block w-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 mr-2">&rarr;</span>
+                    <span class="transform group-hover:translate-x-1 transition-transform duration-300">Contact</span>
+                </a>
+            </nav>
         </div>
 
     </main>
@@ -160,3 +154,4 @@
     </script>
 </body>
 </html>
+
