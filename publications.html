@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Research | Anantha Krishna B</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="design-system.css" />
+<link rel="stylesheet" href="subpage.css" />
+
+<script>
+  (function () {
+    var t = localStorage.getItem('theme');
+    if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+  })();
+</script>
+
+<script>
+  window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <div class="page shell">
+
+    <header class="top no-print" id="site-top"></header>
+
+    <section class="page-head">
+      <span class="num">§ 01</span>
+      <h1>Research</h1>
+    </section>
+
+    <main class="content">
+      <p style="font-size: var(--step-1); color: var(--ink-2); max-width: 60ch; margin-bottom: var(--space-4);">
+        My research interest primarily lies in the representation theory of $p$-adic groups and the local Langlands program.
+      </p>
+
+      <h2>Publications &amp; Preprints</h2>
+      <ul class="entry-list">
+        <li>
+          <div class="entry-row">
+            <span class="entry-title">On a series of Hurwitz zeta functions</span>
+            <span class="entry-date">2023</span>
+          </div>
+          <p class="entry-meta">
+            The Mathematics Student, 92(3–4), 141–145
+            &nbsp;·&nbsp;
+            <a href="https://www.indianmathsoc.org/pdf/Mathstudent-V92-part3-4-2023.pdf" target="_blank" rel="noopener">[link]</a>
+          </p>
+        </li>
+      </ul>
+    </main>
+
+    <footer class="bottom no-print" id="site-bottom"></footer>
+  </div>
+
+  <script src="site-chrome.js" data-page="research"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Talks | Anantha Krishna B</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="design-system.css" />
+<link rel="stylesheet" href="subpage.css" />
+
+<script>
+  (function () {
+    var t = localStorage.getItem('theme');
+    if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+  })();
+</script>
+
+<script>
+  window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <div class="page shell">
+
+    <header class="top no-print" id="site-top"></header>
+
+    <section class="page-head">
+      <span class="num">§ 02</span>
+      <h1>Talks</h1>
+    </section>
+
+    <main class="content">
+      <ul class="entry-list">
+        <li>
+          <div class="entry-row">
+            <a class="entry-title" href="https://math.iisc.ac.in/Postdoc_Student_Symposium-2025.html#anantha" target="_blank" rel="noopener">On Haar Measure on Reductive Groups</a>
+            <span class="entry-date">Nov 17, 2025</span>
+          </div>
+          <p class="entry-meta">Postdoc Student Symposium</p>
+        </li>
+
+        <li>
+          <div class="entry-row">
+            <a class="entry-title" href="https://iiscmathstudentseminars.wordpress.com/2025/09/15/introduction-to-root-systems/" target="_blank" rel="noopener">Introduction to Root Systems</a>
+            <span class="entry-date">Sep 16, 2025</span>
+          </div>
+          <p class="entry-meta">IISc Math Student Seminar</p>
+        </li>
+
+        <li>
+          <div class="entry-row">
+            <a class="entry-title" href="https://iiscmathstudentseminars.wordpress.com/2024/03/18/introduction-to-projective-representations-of-finite-groups/" target="_blank" rel="noopener">Introduction to projective representations of finite groups</a>
+            <span class="entry-date">March 18, 2024</span>
+          </div>
+          <p class="entry-meta">IISc Math Student Seminar</p>
+        </li>
+      </ul>
+    </main>
+
+    <footer class="bottom no-print" id="site-bottom"></footer>
+  </div>
+
+  <script src="site-chrome.js" data-page="talks"></script>
+</body>
+</html>

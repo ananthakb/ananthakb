@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Anantha Krishna B</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="design-system.css" />
+
+<script>
+  /* Theme bootstrap — runs before paint */
+  (function () {
+    var t = localStorage.getItem('theme');
+    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (t === 'dark' || (!t && prefersDark)) {
+      document.documentElement.classList.add('dark');
+    }
+  })();
+</script>
+
+<script>window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<style>
+  .page { min-height: 100vh; display: flex; flex-direction: column; }
+
+  /* Top bar — hosts the wavy animation between name and theme toggle */
+  .top {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: var(--space-3);
+    padding-top: var(--space-3);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .top .id { display: flex; flex-direction: column; gap: 2px; }
+  .top .id .name {
+    font-family: var(--font-mono); font-size: var(--step--1);
+    color: var(--ink); letter-spacing: 0.04em;
+  }
+
+  /* Gaussian Wave Packet */
+  .squiggle-wrap {
+    display: flex; align-items: center;
+    overflow: hidden; min-height: 60px; flex: 1;
+  }
+  #waveCanvas {
+    width: 100%; height: 60px; display: block;
+  }
+
+  /* Hero */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    padding-top: var(--space-5);
+    padding-bottom: var(--space-5);
+  }
+  @media (min-width: 800px) {
+    .hero { grid-template-columns: 1.1fr 1fr; align-items: center; }
+  }
+  .hero-text h1 {
+    font-family: var(--font-sans); font-weight: 400;
+    font-size: var(--step-4); line-height: 1.05;
+    letter-spacing: -0.025em; margin: 0; color: var(--ink);
+  }
+
+  /* Game of Life */
+  .gol-wrap {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    max-width: 420px;
+    justify-self: center;
+  }
+  .gol-wrap canvas {
+    width: 100%; height: 100%; display: block;
+    border: 1px solid var(--line-soft);
+    border-radius: 4px;
+    background: var(--bg-card);
+  }
+  .gol-caption {
+    position: absolute; bottom: -1.6rem; left: 0;
+    font-family: var(--font-mono); font-size: var(--step--1);
+    color: var(--ink-3); letter-spacing: 0.04em;
+  }
+  .gol-caption .pname { color: var(--ink-2); }
+
+  /* Section heading */
+  .section-head {
+    display: flex; align-items: baseline; gap: var(--space-3);
+    margin-bottom: var(--space-3); padding-top: var(--space-4);
+    border-top: 1px solid var(--line-soft);
+  }
+  .section-head .num {
+    font-family: var(--font-mono); font-size: var(--step--1);
+    color: var(--ink-3); letter-spacing: 0.1em;
+  }
+  .section-head h2 {
+    font-family: var(--font-sans); font-weight: 500;
+    font-size: var(--step-2); margin: 0; color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  /* Nav cards */
+  .cards {
+    display: grid; grid-template-columns: 1fr; gap: 1px;
+    background: var(--line-soft); border: 1px solid var(--line-soft);
+    border-radius: 4px; overflow: hidden;
+  }
+  @media (min-width: 640px) { .cards { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 900px) { .cards { grid-template-columns: 1fr 1fr 1fr; } }
+  .card {
+    background: var(--bg-card); padding: var(--space-3);
+    display: flex; flex-direction: column; gap: var(--space-2);
+    border: none; text-decoration: none; position: relative;
+    transition: background 0.25s ease; min-height: 130px;
+  }
+  .card:hover { background: var(--bg-soft); color: inherit; }
+  .card .card-num {
+    font-family: var(--font-mono); font-size: var(--step--1);
+    color: var(--ink-3); letter-spacing: 0.08em;
+  }
+  .card .card-title {
+    font-family: var(--font-sans); font-weight: 500;
+    font-size: var(--step-1); color: var(--ink);
+    letter-spacing: -0.01em; display: flex; align-items: center; gap: 0.5rem;
+  }
+  .card .card-title .arrow {
+    font-family: var(--font-mono); color: var(--ink-3);
+    opacity: 0; transform: translateX(-4px);
+    transition: opacity 0.25s, transform 0.25s, color 0.25s;
+  }
+  .card:hover .card-title .arrow {
+    opacity: 1; transform: translateX(0); color: var(--accent);
+  }
+
+  /* Bottom */
+  .bottom {
+    margin-top: var(--space-4); padding-top: var(--space-3); padding-bottom: var(--space-4);
+    border-top: 1px solid var(--line-soft);
+    display: flex; justify-content: space-between; align-items: center;
+    gap: var(--space-3); flex-wrap: wrap;
+    font-family: var(--font-mono); font-size: var(--step--1); color: var(--ink-3);
+  }
+
+  .reveal { opacity: 0; transform: translateY(8px); animation: rise 0.7s ease forwards; }
+  .reveal.d2 { animation-delay: 0.1s; }
+  .reveal.d3 { animation-delay: 0.2s; }
+  @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .squiggle path { animation: none; }
+    .reveal { animation: none; opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+  <div class="page shell">
+
+    <!-- Top bar -->
+    <header class="top no-print">
+      <div class="id">
+        <span class="name">anantha krishna b</span>
+      </div>
+      <div class="squiggle-wrap" aria-hidden="true">
+        <canvas id="waveCanvas" height="60"></canvas>
+      </div>
+      <button id="themeBtn" class="theme-toggle" aria-label="Toggle theme">
+        <span class="dot"></span>
+        <span id="themeLabel">light</span>
+      </button>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-text reveal">
+        <h1>Anantha Krishna&nbsp;B</h1>
+      </div>
+
+      <div class="gol-wrap reveal d2">
+        <canvas id="gol" width="640" height="640" aria-hidden="true"></canvas>
+        <div class="gol-caption">
+          Conway's Game of Life · <span class="pname" id="golName">—</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nav cards -->
+    <section class="reveal d3">
+      <div class="section-head">
+        <span class="num">§ 01</span>
+        <h2>Sections</h2>
+      </div>
+      <nav class="cards">
+        <a class="card" href="publications.html">
+          <span class="card-num">01 / research</span>
+          <span class="card-title">Research <span class="arrow">→</span></span>
+        </a>
+        <a class="card" href="talks.html">
+          <span class="card-num">02 / talks</span>
+          <span class="card-title">Talks <span class="arrow">→</span></span>
+        </a>
+        <a class="card" href="teaching.html">
+          <span class="card-num">03 / teaching</span>
+          <span class="card-title">Teaching <span class="arrow">→</span></span>
+        </a>
+        <a class="card" href="miscellaneous.html">
+          <span class="card-num">04 / misc</span>
+          <span class="card-title">Misc <span class="arrow">→</span></span>
+        </a>
+        <a class="card" href="contact.html">
+          <span class="card-num">05 / contact</span>
+          <span class="card-title">Contact <span class="arrow">→</span></span>
+        </a>
+      </nav>
+    </section>
+
+    <!-- Bottom -->
+    <footer class="bottom no-print">
+      <div>© anantha krishna b · 2026</div>
+    </footer>
+  </div>
+
+  <script>
+  /* ============================================================
+     Gaussian Wave Packet — canvas renderer
+     All tuneable parameters are in WAVE_PARAMS below.
+     ============================================================ */
+  (function () {
+    var canvas = document.getElementById('waveCanvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+
+    /* ---------- Tuneable parameters ---------- */
+    var WAVE_PARAMS = {
+      amplitude:   25,     // max height of the pulse (px in logical coords)
+      frequency:   0.148,  // carrier sine tightness (rad/px)
+      packetWidth: 2700,   // Gaussian variance — wider = broader envelope
+      packetSpeed: 3.5,    // group velocity (px/frame at 60fps)
+      waveSpeed:   0.15,   // phase velocity of internal wave (rad/frame)
+      step:        3       // x step in pixels — lower = smoother, higher = faster
+    };
+    /* ----------------------------------------- */
+
+    var DPR   = Math.max(1, window.devicePixelRatio || 1);
+    var W     = 0;
+    var H     = 60;
+    var time  = 0;
+    var center = 0;
+
+    function getStrokeColor() {
+      return getComputedStyle(document.documentElement)
+        .getPropertyValue('--ink').trim() || '#222';
+    }
+
+    function resize() {
+      var rect = canvas.getBoundingClientRect();
+      W = rect.width;
+      canvas.width  = Math.round(W * DPR);
+      canvas.height = Math.round(H * DPR);
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+      /* Start packet at left edge on first run */
+      if (center === 0) center = -Math.sqrt(WAVE_PARAMS.packetWidth) * 3;
+    }
+
+    function drawFrame() {
+      var p = WAVE_PARAMS;
+      var baseY = H / 2;
+
+      ctx.clearRect(0, 0, W, H);
+      ctx.beginPath();
+      ctx.strokeStyle = getStrokeColor();
+      ctx.lineWidth   = 1.5;
+      ctx.lineJoin    = 'round';
+      ctx.lineCap     = 'round';
+
+      var first = true;
+      for (var x = 0; x <= W; x += p.step) {
+        var y = baseY + (
+          p.amplitude *
+          Math.exp(-Math.pow(x - center, 2) / p.packetWidth) *
+          Math.sin(x * p.frequency - time * p.waveSpeed)
+        );
+        if (first) { ctx.moveTo(x, y); first = false; }
+        else        { ctx.lineTo(x, y); }
+      }
+      ctx.stroke();
+
+      /* Advance time and move envelope; loop when fully off-screen right */
+      time   += 1;
+      center += p.packetSpeed;
+      var tail = Math.sqrt(p.packetWidth) * 4; /* ~4σ is effectively zero */
+      if (center - tail > W) {
+        center = -tail;
+      }
+
+      requestAnimationFrame(drawFrame);
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+    requestAnimationFrame(drawFrame);
+
+    /* Expose so theme toggle can trigger a redraw on next frame (no-op needed) */
+    window.__wave = true;
+  })();
+  </script>
+
+  <script>
+  /* Theme toggle */
+  (function () {
+    var btn = document.getElementById('themeBtn');
+    var label = document.getElementById('themeLabel');
+    function sync() {
+      var dark = document.documentElement.classList.contains('dark');
+      label.textContent = dark ? 'dark' : 'light';
+    }
+    sync();
+    btn.addEventListener('click', function () {
+      document.documentElement.classList.toggle('dark');
+      var dark = document.documentElement.classList.contains('dark');
+      localStorage.setItem('theme', dark ? 'dark' : 'light');
+      sync();
+      if (window.__gol && window.__gol.refresh) window.__gol.refresh();
+    });
+  })();
+  </script>
+
+  <script>
+  /* Conway's Game of Life — picks a random well-known pattern on each load */
+  (function () {
+    var canvas = document.getElementById('gol');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var DPR = Math.max(1, window.devicePixelRatio || 1);
+
+    // Patterns encoded as relative (col, row) live cells.
+    // Compiled and corrected from common Life lexicon.
+    var PATTERNS = {
+      "Gosper Glider Gun": [
+        [24,0],[22,1],[24,1],[12,2],[13,2],[20,2],[21,2],[34,2],[35,2],
+        [11,3],[15,3],[20,3],[21,3],[34,3],[35,3],
+        [0,4],[1,4],[10,4],[16,4],[20,4],[21,4],
+        [0,5],[1,5],[10,5],[14,5],[16,5],[17,5],[22,5],[24,5],
+        [10,6],[16,6],[24,6],[11,7],[15,7],[12,8],[13,8]
+      ],
+      "Pulsar": [
+        [2,0],[3,0],[4,0],[8,0],[9,0],[10,0],
+        [0,2],[5,2],[7,2],[12,2],[0,3],[5,3],[7,3],[12,3],[0,4],[5,4],[7,4],[12,4],
+        [2,5],[3,5],[4,5],[8,5],[9,5],[10,5],
+        [2,7],[3,7],[4,7],[8,7],[9,7],[10,7],
+        [0,8],[5,8],[7,8],[12,8],[0,9],[5,9],[7,9],[12,9],[0,10],[5,10],[7,10],[12,10],
+        [2,12],[3,12],[4,12],[8,12],[9,12],[10,12]
+      ],
+      "Pentadecathlon": [
+        [0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,0],[8,0],[9,0]
+      ],
+      "Kok's Galaxy": [
+        [0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[7,0],[8,0],
+        [0,1],[1,1],[2,1],[3,1],[4,1],[5,1],[7,1],[8,1],
+        [7,2],[8,2],
+        [0,3],[1,3],[7,3],[8,3],
+        [0,4],[1,4],[7,4],[8,4],
+        [0,5],[1,5],[7,5],[8,5],
+        [0,6],[1,6],
+        [0,7],[1,7],[3,7],[4,7],[5,7],[6,7],[7,7],[8,7],
+        [0,8],[1,8],[3,8],[4,8],[5,8],[6,8],[7,8],[8,8]
+      ],
+      "Acorn": [[1,0],[3,1],[0,2],[1,2],[4,2],[5,2],[6,2]],
+      "R-pentomino": [[1,0],[2,0],[0,1],[1,1],[1,2]],
+      "Diehard": [[6,0],[0,1],[1,1],[1,2],[5,2],[6,2],[7,2]],
+      "Thunderbird": [[0,0],[1,0],[2,0],[1,2],[1,3],[1,4]],
+      "Heavyweight Spaceship": [
+        [1,0],[2,0],[3,0],[4,0],[5,0],[6,0],
+        [0,1],[7,1],
+        [7,2],
+        [0,3],[6,3],
+        [2,4],[3,4]
+      ],
+      "Middleweight Spaceship": [
+        [1,0],[2,0],[3,0],[4,0],[5,0],
+        [0,1],[5,1],
+        [5,2],
+        [0,3],[4,3],
+        [2,4]
+      ],
+      "Lightweight Spaceship": [[1,0],[4,0],[0,1],[0,2],[4,2],[0,3],[1,3],[2,3],[3,3]],
+      "Simkin Glider Gun": [
+        [0,0],[1,0],[7,0],[8,0],
+        [0,1],[1,1],[7,1],[8,1],
+        [4,2],[5,2],
+        [4,3],[5,3],
+        [21,4],[22,4],[23,4],
+        [20,5],[24,5],
+        [24,6],
+        [20,7],[21,7],[23,7],
+        [31,7],[32,7],
+        [22,8],[31,8],[32,8],
+        [21,11],[22,11],[23,11],
+        [20,12],[24,12],
+        [24,13],
+        [20,14],[21,14],[23,14]
+      ],
+      "Block-laying Switch Engine": [
+        [0,0],[2,0],[2,1],[4,2],[5,2],[6,2],[4,3],[5,3]
+      ],
+      "Glider x4": [
+        [1,0],[2,1],[0,2],[1,2],[2,2],
+        [21,0],[22,1],[20,2],[21,2],[22,2],
+        [1,20],[2,21],[0,22],[1,22],[2,22],
+        [21,20],[22,21],[20,22],[21,22],[22,22]
+      ],
+      "Figure Eight": [
+        [0,0],[1,0],[2,0],[0,1],[1,1],[2,1],[0,2],[1,2],[2,2],
+        [3,3],[4,3],[5,3],[3,4],[4,4],[5,4],[3,5],[4,5],[5,5]
+      ],
+      "Tumbler": [
+        [1,0],[2,0],[4,0],[5,0],
+        [1,1],[2,1],[4,1],[5,1],
+        [2,2],[4,2],
+        [0,3],[2,3],[4,3],[6,3],
+        [0,4],[2,4],[4,4],[6,4],
+        [0,5],[1,5],[5,5],[6,5]
+      ],
+      "Glider Train": [
+        [1,0],[2,1],[0,2],[1,2],[2,2],
+        [11,0],[12,1],[10,2],[11,2],[12,2],
+        [21,0],[22,1],[20,2],[21,2],[22,2],
+        [31,0],[32,1],[30,2],[31,2],[32,2],
+        [41,0],[42,1],[40,2],[41,2],[42,2]
+      ],
+      "Coe's p8": [
+        [3,0],[4,0],[2,1],[5,1],[1,2],[6,2],[1,3],[3,3],[4,3],[6,3],
+        [1,4],[3,4],[4,4],[6,4],[1,5],[6,5],[2,6],[5,6],[3,7],[4,7]
+      ],
+      "Infinite Growth (1D)": [
+        [0,0],[1,0],[2,0],[3,0],[4,0],[5,0],[6,0],[8,0],[9,0],[10,0],
+        [14,0],[15,0],[16,0],[22,0],[23,0],[24,0],[25,0],[26,0],[27,0],[28,0],
+        [30,0],[31,0],[32,0]
+      ],
+      "Blinker Puffer": [
+        [1,0],[2,0],[3,0],[9,0],[10,0],[11,0],
+        [0,1],[4,1],[8,1],[12,1],
+        [4,2],[8,2],
+        [1,3],[2,3],[3,3],[9,3],[10,3],[11,3],
+        [4,4],[8,4],[4,5],[8,5],
+        [1,6],[4,6],[8,6],[11,6]
+      ],
+      "Edna": [
+        [0,0],[4,0],[0,1],[1,1],[2,1],[3,1],[4,1],
+        [1,2],[3,2],[1,3],[2,3],[3,3],
+        [0,4],[1,4],[3,4],[4,4],
+        [0,5],[4,5]
+      ],
+      "Double Glider": [
+        [1,0],[2,1],[0,2],[1,2],[2,2],
+        [6,0],[7,1],[5,2],[6,2],[7,2]
+      ]
+    };
+
+    var COLS = 64, ROWS = 64;
+    var grid = makeGrid(COLS, ROWS);
+    var nextGrid = makeGrid(COLS, ROWS);
+    var stepDelay = 110;
+    var lastStep = 0;
+    var W = 0, H = 0, cellW = 0, cellH = 0;
+
+    function makeGrid(c, r) {
+      var g = new Uint8Array(c * r);
+      return g;
+    }
+    function idx(x, y) {
+      x = (x + COLS) % COLS; y = (y + ROWS) % ROWS;
+      return y * COLS + x;
+    }
+
+    function loadPattern(name) {
+      var pts = PATTERNS[name];
+      grid.fill(0);
+      // Find bbox
+      var minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+      for (var i = 0; i < pts.length; i++) {
+        if (pts[i][0] < minX) minX = pts[i][0];
+        if (pts[i][1] < minY) minY = pts[i][1];
+        if (pts[i][0] > maxX) maxX = pts[i][0];
+        if (pts[i][1] > maxY) maxY = pts[i][1];
+      }
+      var pw = maxX - minX + 1;
+      var ph = maxY - minY + 1;
+      var ox = Math.floor((COLS - pw) / 2) - minX;
+      var oy = Math.floor((ROWS - ph) / 2) - minY;
+      for (var j = 0; j < pts.length; j++) {
+        grid[idx(pts[j][0] + ox, pts[j][1] + oy)] = 1;
+      }
+      var nameEl = document.getElementById('golName');
+      if (nameEl) nameEl.textContent = name;
+    }
+
+    function step() {
+      for (var y = 0; y < ROWS; y++) {
+        for (var x = 0; x < COLS; x++) {
+          var n = 0;
+          for (var dy = -1; dy <= 1; dy++) {
+            for (var dx = -1; dx <= 1; dx++) {
+              if (dx === 0 && dy === 0) continue;
+              n += grid[idx(x + dx, y + dy)];
+            }
+          }
+          var alive = grid[idx(x, y)];
+          var next = 0;
+          if (alive && (n === 2 || n === 3)) next = 1;
+          else if (!alive && n === 3) next = 1;
+          nextGrid[y * COLS + x] = next;
+        }
+      }
+      var tmp = grid; grid = nextGrid; nextGrid = tmp;
+    }
+
+    function readColors() {
+      var s = getComputedStyle(document.documentElement);
+      return {
+        cell: s.getPropertyValue('--ink').trim() || '#222',
+        line: s.getPropertyValue('--line-soft').trim() || '#eee',
+        bg:   s.getPropertyValue('--bg-card').trim() || '#fff'
+      };
+    }
+    var COLORS = readColors();
+
+    function resize() {
+      var rect = canvas.getBoundingClientRect();
+      W = rect.width; H = rect.height;
+      canvas.width = Math.round(W * DPR);
+      canvas.height = Math.round(H * DPR);
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+      cellW = W / COLS; cellH = H / ROWS;
+    }
+
+    function draw() {
+      ctx.fillStyle = COLORS.bg;
+      ctx.fillRect(0, 0, W, H);
+
+      // subtle grid
+      ctx.strokeStyle = COLORS.line;
+      ctx.lineWidth = 0.5;
+      ctx.beginPath();
+      for (var i = 0; i <= COLS; i += 4) {
+        var x = i * cellW;
+        ctx.moveTo(x, 0); ctx.lineTo(x, H);
+      }
+      for (var j = 0; j <= ROWS; j += 4) {
+        var y = j * cellH;
+        ctx.moveTo(0, y); ctx.lineTo(W, y);
+      }
+      ctx.stroke();
+
+      ctx.fillStyle = COLORS.cell;
+      var pad = Math.max(0.5, cellW * 0.12);
+      for (var y2 = 0; y2 < ROWS; y2++) {
+        for (var x2 = 0; x2 < COLS; x2++) {
+          if (grid[y2 * COLS + x2]) {
+            ctx.fillRect(x2 * cellW + pad, y2 * cellH + pad, cellW - pad * 2, cellH - pad * 2);
+          }
+        }
+      }
+    }
+
+    function tick(ts) {
+      if (ts - lastStep > stepDelay) { step(); lastStep = ts; }
+      draw();
+      requestAnimationFrame(tick);
+    }
+
+    function pickAndLoad() {
+      var names = Object.keys(PATTERNS);
+      var name = names[Math.floor(Math.random() * names.length)];
+      loadPattern(name);
+    }
+
+    // Reload pattern when stagnant: count generations since change
+    var stableCount = 0, lastChecksum = 0;
+    setInterval(function () {
+      var sum = 0;
+      for (var k = 0; k < grid.length; k++) sum += grid[k] * (k + 1);
+      if (sum === lastChecksum) stableCount++; else stableCount = 0;
+      lastChecksum = sum;
+      if (stableCount > 40) { stableCount = 0; pickAndLoad(); }
+    }, 800);
+
+    canvas.addEventListener('click', pickAndLoad);
+
+    window.__gol = {
+      refresh: function () { COLORS = readColors(); }
+    };
+    window.addEventListener('resize', resize);
+
+    resize();
+    pickAndLoad();
+    requestAnimationFrame(tick);
+  })();
+  </script>
+</body>
+</html>

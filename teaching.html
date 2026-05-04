@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Teaching | Anantha Krishna B</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="design-system.css" />
+<link rel="stylesheet" href="subpage.css" />
+
+<script>
+  (function () {
+    var t = localStorage.getItem('theme');
+    if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+  })();
+</script>
+
+<script>
+  window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <div class="page shell">
+
+    <header class="top no-print" id="site-top"></header>
+
+    <section class="page-head">
+      <span class="num">§ 03</span>
+      <h1>Teaching</h1>
+    </section>
+
+    <main class="content">
+      <h2>IISc Bengaluru</h2>
+      <ul class="entry-list">
+        <li>
+          <div class="entry-row">
+            <span class="entry-title">UM 205: Introduction to Algebraic Structures</span>
+            <span class="entry-date">Spring 2026</span>
+          </div>
+          <p class="entry-meta">Teaching Assistant.</p>
+        </li>
+
+        <li>
+          <div class="entry-row">
+            <span class="entry-title">MA 212: Algebra I</span>
+            <span class="entry-date">Fall 2025</span>
+          </div>
+          <p class="entry-meta">Teaching Assistant.</p>
+        </li>
+      </ul>
+    </main>
+
+    <footer class="bottom no-print" id="site-bottom"></footer>
+  </div>
+
+  <script src="site-chrome.js" data-page="teaching"></script>
+</body>
+</html>
